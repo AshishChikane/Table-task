@@ -14,7 +14,6 @@ export default function Layout() {
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
   const [paginationSize, setPaginationSize] = useState(3);
   const [page, setPage] = useState(1);
-  const rowsCount = paginationSize;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,8 +55,8 @@ export default function Layout() {
     fetchData();
   }, [debouncedSearchQuery, cityCount, page, paginationSize]);
 
-  const startIndex = (page - 1) * rowsCount + 1;
-  const endIndex = Math.min(startIndex + rowsCount - 1, cities.length);
+  const startIndex = (page - 1) * paginationSize + 1;
+  const endIndex = Math.min(startIndex + paginationSize - 1, cities.length);
   const visibleData = cities.slice(startIndex - 1, endIndex);
 
   return (
